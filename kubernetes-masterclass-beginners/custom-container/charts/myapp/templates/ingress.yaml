@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}
+  labels:
+  {{- with .Values.podLabels }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+  {{- with .Values.ingress.hosts }}
+    {{- toYaml . | nindent 4}}
+  {{- end -}}
